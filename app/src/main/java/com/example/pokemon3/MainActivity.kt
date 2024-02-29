@@ -1,9 +1,8 @@
 package com.example.pokemon3
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.app.AppCompatActivity
+import com.example.pokemon3.adapter.PokemonAdapter
 import com.example.pokemon3.data.Api
 import com.example.pokemon3.data.PokemonResponse
 import com.example.pokemon3.databinding.ActivityMainBinding
@@ -20,26 +19,23 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        init()
+        init() { result ->
+            binding.rvPokemon.adapter = PokemonAdapter(result?.results ?: emptyList())
+        }
 
     }
 
-    private fun init(){
+    private fun init(result: (PokemonResponse?) -> Unit) {
 
 //      val tvResult : TextView = findViewById(R.id.tv_Result)
         val request = Api.build().loadPokemon(151)
-        request.enqueue(object : Callback<PokemonResponse>{
+        request.enqueue(object : Callback<PokemonResponse> {
             override fun onResponse(
                 call: Call<PokemonResponse>,
                 response: Response<PokemonResponse>
             ) {
                 val pokemonResponse = response.body()
-
-                pokemonResponse?.results?.let {
-                    it.forEach{
-                        binding.tvResult.append("\n${it.name}")
-                    }
-                }
+                result.invoke(pokemonResponse)
             }
 
             override fun onFailure(call: Call<PokemonResponse>, t: Throwable) {

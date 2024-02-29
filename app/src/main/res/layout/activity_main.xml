@@ -6,9 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/tv_Result"
-        android:layout_width="0dp"
+    <androidx.recyclerview.widget.RecyclerView
+        tools:listitem="@layout/item_pokemon"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:id="@+id/rv_pokemon"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Pokemon"
         android:textSize="18sp"
