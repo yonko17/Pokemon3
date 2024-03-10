@@ -1,4 +1,4 @@
-package com.example.pokemon3.data
+package com.example.pokemon3.data.models
 
 data class PokemonResponse(
     val count:Int,
@@ -8,3 +8,4 @@ data class PokemonResponse(
 )
 
 data class Pokemon (val name:String, val url:String)
+

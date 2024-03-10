@@ -1,10 +1,11 @@
 package com.example.pokemon3
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pokemon3.adapter.PokemonAdapter
 import com.example.pokemon3.data.Api
-import com.example.pokemon3.data.PokemonResponse
+import com.example.pokemon3.data.models.PokemonResponse
 import com.example.pokemon3.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,7 +21,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         init() { result ->
-            binding.rvPokemon.adapter = PokemonAdapter(result?.results ?: emptyList())
+            binding.rvPokemon.adapter = PokemonAdapter(result?.results ?: emptyList()){
+                it.url
+                Log.e("URL", it.url)
+            }
         }
 
     }
