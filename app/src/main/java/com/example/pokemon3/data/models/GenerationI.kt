@@ -1,6 +1,6 @@
 package com.example.pokemon3.data.models
 
 data class GenerationI(
-    val red-blue: RedBlue,
+    val redblue: RedBlue,
     val yellow: Yellow
 )
