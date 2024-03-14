@@ -10,14 +10,14 @@
         android:id="@+id/tv_pokemonName"
         android:layout_width="175dp"
         android:layout_height="66dp"
-        android:foregroundGravity="center"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/black"
-        tools:text="POKEMON" />
+        tools:text="POKEMON"/>
 
     <ImageView
         android:id="@+id/iv_pickPokemon"
