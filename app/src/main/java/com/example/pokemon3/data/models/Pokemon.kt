@@ -1,11 +1,16 @@
 package com.example.pokemon3.data.models
 
-data class PokemonResponse(
-    val count:Int,
-    val next:String,
-    val previous:String,
-    val results:List<Pokemon>
-)
+import com.google.gson.annotations.SerializedName
 
-data class Pokemon (val name:String, val url:String)
+data class PokemonResponse(
+    @SerializedName ("count")   val count:Int,
+    @SerializedName ("next")    val next:String,
+    @SerializedName ("previous")val previous:String,
+    @SerializedName ("results") val results:List<Pokemon>
+    )
+
+data class Pokemon (
+    @SerializedName ("name")   val name:String,
+    @SerializedName ("url")    val url:String
+    )
 

@@ -2,21 +2,23 @@ package com.example.pokemon3.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokemon3.data.models.Pokemon
 import com.example.pokemon3.databinding.ItemPokemonBinding
 
-class PokemonAdapter(private val pokemonList: List<Pokemon>, private val itemCallback: (pokemon: Pokemon) -> Unit) : RecyclerView.Adapter<PokemonViewHolder>() {
+class PokemonListAdapter(private val itemCallback: (pokemon: Pokemon) -> Unit) : ListAdapter<Pokemon, PokemonViewHolder>(PokemonDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
-        val binding = ItemPokemonBinding.inflate(LayoutInflater.from(parent.context))
+        val binding = ItemPokemonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PokemonViewHolder(binding,itemCallback)
     }
 
-    override fun getItemCount(): Int = pokemonList.size
-
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-        val item = pokemonList[position]
+        val item = getItem(position)
         holder.render(item)
+    }
+    fun filterList(filteredPokemonList: List<Pokemon>) {
     }
 }
 
@@ -26,5 +28,15 @@ class PokemonViewHolder(private val binding: ItemPokemonBinding, private val ite
     fun render(pokemonModel: Pokemon){
         binding.textView.text = pokemonModel.name
         binding.textView.setOnClickListener {itemCallback(pokemonModel)}
+    }
+
+}
+class PokemonDiffCallback : DiffUtil.ItemCallback<Pokemon>() {
+    override fun areItemsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
+        return oldItem.name  == newItem.name
+    }
+
+    override fun areContentsTheSame(oldItem: Pokemon, newItem: Pokemon): Boolean {
+        return oldItem == newItem
     }
 }

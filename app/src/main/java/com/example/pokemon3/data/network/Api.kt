@@ -1,13 +1,11 @@
-package com.example.pokemon3.data
+package com.example.pokemon3.data.network
 
-import com.example.pokemon3.data.models.Pokemon
 import com.example.pokemon3.data.models.PokemonDetailsModel
 import com.example.pokemon3.data.models.PokemonResponse
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.Url
 
@@ -31,7 +29,7 @@ object Api {
 //        val retrofit = builder.baseUrl(url).build()
 //        return retrofit.create(RemoteService::class.java)
 //    }
-    fun build() : RemoteService{
+    fun build() : RemoteService {
         return builder.build().create(RemoteService::class.java)
     }
 }
