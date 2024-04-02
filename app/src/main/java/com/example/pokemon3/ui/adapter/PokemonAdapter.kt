@@ -1,4 +1,4 @@
-package com.example.pokemon3.adapter
+package com.example.pokemon3.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pokemon3.data.models.Pokemon
 import com.example.pokemon3.databinding.ItemPokemonBinding
 
-class PokemonListAdapter(private val itemCallback: (pokemon: Pokemon) -> Unit) : ListAdapter<Pokemon, PokemonViewHolder>(PokemonDiffCallback()) {
+class PokemonListAdapter(private val itemCallback: (pokemon: Pokemon) -> Unit) : ListAdapter<Pokemon, PokemonViewHolder>(
+    PokemonDiffCallback()
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
         val binding = ItemPokemonBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PokemonViewHolder(binding,itemCallback)
@@ -17,8 +19,6 @@ class PokemonListAdapter(private val itemCallback: (pokemon: Pokemon) -> Unit) :
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
         val item = getItem(position)
         holder.render(item)
-    }
-    fun filterList(filteredPokemonList: List<Pokemon>) {
     }
 }
 

@@ -12,10 +12,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.pokemon3.R
-import com.example.pokemon3.adapter.PokemonListAdapter
+import com.example.pokemon3.ui.adapter.PokemonListAdapter
 import com.example.pokemon3.data.network.Api
 import com.example.pokemon3.data.models.PokemonResponse
-import com.example.pokemon3.ui.viewmodel.PokemonViewModel
+import com.example.pokemon3.domain.viewmodel.PokemonViewModel
 import com.example.pokemon3.databinding.FragmentPokemonBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,7 +37,7 @@ class PokemonFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init { result ->
+        pokemonViewModel.loadPokemon { result ->
             val adapter = PokemonListAdapter { pokemon ->
                 Log.e("URL", pokemon.url)
                 pokemonViewModel.randomPokemon(pokemon)
@@ -58,20 +58,4 @@ class PokemonFragment : Fragment() {
         }
     }
 
-    private fun init(result: (PokemonResponse?) -> Unit) {
-        val request = Api.build().loadPokemon(151)
-        request.enqueue(object : Callback<PokemonResponse> {
-            override fun onResponse(
-                call: Call<PokemonResponse>,
-                response: Response<PokemonResponse>
-            ) {
-                val pokemonResponse = response.body()
-                result.invoke(pokemonResponse)
-            }
-
-            override fun onFailure(call: Call<PokemonResponse>, t: Throwable) {
-                println(t.message)
-            }
-        })
-    }
 }

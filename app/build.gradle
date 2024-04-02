@@ -49,6 +49,9 @@ android {
 dependencies {
     var navVer = "2.7.7"
 
+
+    // Dagger Hilt
+    implementation 'com.google.dagger:dagger:2.35'
     //viewmodel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0"
     //LiveData
